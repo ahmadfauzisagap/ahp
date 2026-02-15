@@ -5,6 +5,14 @@ import altair as alt
 
 # ... (your imports) ...
 
+# --- PAGE CONFIGURATION (Link Title & Icon) ---
+# This sets the title for WhatsApp/Browser Tabs
+st.set_page_config(
+    page_title="Analytic Hierarchy Process-by Ahmad Fauzi",  # <--- This is the Title people will see
+    page_icon="⚓",                          # <--- This is the little icon
+    layout="wide"
+)
+
 # --- LOGIN SYSTEM ---
 password = st.sidebar.text_input("Enter Password to Access:", type="password")
 
@@ -192,5 +200,6 @@ with tab2:
     st.dataframe(matrix_df)
 
     st.download_button("📥 Download Matrix (CSV)", matrix_df.to_csv().encode('utf-8'), "matrix.csv", "text/csv")
+
 
 
