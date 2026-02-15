@@ -108,7 +108,7 @@ tab1, tab2 = st.tabs(["📝 Comparisons & Results", "🔢 Full Matrix"])
 
 # --- TAB 1: SLIDERS & RESULTS ---
 with tab1:
-    st.markdown("### 1. Pairwise Comparisons")
+    st.markdown("### 2. Pairwise Comparisons")
     st.caption(f"Total comparisons: {int((n*(n-1))/2)}")
     st.divider()
     
@@ -136,7 +136,7 @@ with tab1:
             matrix[i, j] = actual_val
             matrix[j, i] = 1 / actual_val
     
-    st.markdown("### 2. Analysis Results")
+    st.markdown("### 3. Analysis Results")
     
     if st.button("Calculate Results", type="primary", use_container_width=True):
         ahp = AHP(criteria, matrix)
@@ -192,4 +192,5 @@ with tab2:
     st.dataframe(matrix_df)
 
     st.download_button("📥 Download Matrix (CSV)", matrix_df.to_csv().encode('utf-8'), "matrix.csv", "text/csv")
+
 
