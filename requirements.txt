@@ -4,4 +4,4 @@ numpy
 matplotlib
 scikit-fuzzy
 openpyxl
-import altair
+altair
