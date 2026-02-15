@@ -79,9 +79,18 @@ st.title("AHP Priority Calculator")
 # --- SIDEBAR ---
 st.sidebar.header("1. Define Criteria")
 default_criteria = "Price\nQuality\nDesign\nSupport"
-criteria_text = st.sidebar.text_area("Type criteria (one per line):", default_criteria, height=250)
+
+# 1. The Input Form (Mobile Friendly)
+with st.sidebar.form(key='criteria_form'):
+    # Note: We use 'st.text_area' here, NOT 'st.sidebar.text_area' 
+    # because it is already inside the sidebar form.
+    criteria_text = st.text_area("Type criteria (one per line):", value=default_criteria, height=250)
+    submit_button = st.form_submit_button(label='✅ Update Criteria')
+
+# 2. Process the Input
 criteria = [c.strip() for c in criteria_text.split('\n') if c.strip()]
 
+# 3. Check for Errors
 count = len(criteria)
 if count < 2:
     st.sidebar.error(f"⚠️ Total: {count} (Need at least 2)")
@@ -183,3 +192,4 @@ with tab2:
     st.dataframe(matrix_df)
 
     st.download_button("📥 Download Matrix (CSV)", matrix_df.to_csv().encode('utf-8'), "matrix.csv", "text/csv")
+
