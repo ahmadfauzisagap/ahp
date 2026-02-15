@@ -6,40 +6,12 @@ import altair as alt
 # ... (your imports) ...
 
 # --- LOGIN SYSTEM ---
-def check_password():
-    """Returns `True` if the user had the correct password."""
+password = st.sidebar.text_input("Enter Password to Access:", type="password")
 
-    def password_entered():
-        """Checks whether a password entered by the user is correct."""
-        if st.session_state["password"] == "marine2026":  # <--- SET YOUR MASTER PASSWORD HERE
-            st.session_state["password_correct"] = True
-            del st.session_state["password"]  # don't store password
-        else:
-            st.session_state["password_correct"] = False
-
-    if "password_correct" not in st.session_state:
-        # First run, show input for password.
-        st.text_input(
-            "Please enter the access key to use the Marine System:", 
-            type="password", 
-            on_change=password_entered, 
-            key="password"
-        )
-        return False
-    elif not st.session_state["password_correct"]:
-        # Password incorrect, show input again.
-        st.text_input(
-            "Access denied. Please try again:", 
-            type="password", 
-            on_change=password_entered, 
-            key="password"
-        )
-        return False
-    else:
-        # Password correct.
-        return True
-
-if check_password():
+if password != "1234":  # Change "1234" to your real password
+    st.sidebar.error("🔒 Access Denied")
+    st.warning("Please enter the correct password in the sidebar to view the app.")
+    st.stop()  # <--- THIS IS THE MAGIC COMMAND. It stops the app here!
     # --- YOUR MAIN APP CODE STARTS HERE ---
     st.sidebar.success("Logged in successfully")
     
@@ -209,4 +181,5 @@ with tab2:
     st.markdown("### Pairwise Comparison Matrix")
     matrix_df = pd.DataFrame(matrix, index=criteria, columns=criteria)
     st.dataframe(matrix_df)
+
     st.download_button("📥 Download Matrix (CSV)", matrix_df.to_csv().encode('utf-8'), "matrix.csv", "text/csv")
